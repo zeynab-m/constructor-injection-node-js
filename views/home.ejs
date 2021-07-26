@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <%- include('partials/head', {TITLE: 'home'}) %>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+    <link href="/public/plugins/ssi-uploader/dist/ssi-uploader/styles/ssi-uploader.min.css" rel="stylesheet">
+    <link href="/public/plugins/slideShow/slider.css" rel="stylesheet">
+</head>
+
+<body class="layout layout-header-fixed">
+    <div class="layout-header">
+        <%- include('partials/navbar', {TITLE:'home'}) %>
+    </div>
+    <div class="layout-main">
+        <%- include('partials/sidebar') %>
+        <div class="layout-content">
+            <div class="layout-content-body">
+
+                <div class="form-group col-md-12">
+                    <div id="map" style="height: 80vh;"></div>
+                </div>
+
+            </div>
+        </div>
+        <%- include('partials/footer') %>
+    </div>
+
+
+    <%- include('partials/scripts') %>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin="">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/4.7.3/turf.min.js"></script>
+    <script src="/public/js/pin.osm.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            $('#map').on('click', '.popup .cycle a', function() {
+                var $slideshow = $('.slideshow'),
+                    $newSlide;
+
+                if ($(this).hasClass('prev')) {
+                    $newSlide = $slideshow.find('.active').prev();
+                    if ($newSlide.index() < 0) {
+                        $newSlide = $('.image').last();
+                    }
+                } else {
+                    $newSlide = $slideshow.find('.active').next();
+                    if ($newSlide.index() < 0) {
+                        $newSlide = $('.image').first();
+                    }
+                }
+
+                $slideshow.find('.active').removeClass('active').hide();
+                $newSlide.addClass('active').show();
+                return false;
+            })
+
+            let points = <%-JSON.stringify(points)%> || [];
+
+            var pin = new Pin().initiateMap({elementId: 'map'}).initiateDrawManager().addMarkers(points)
+
+        })
+    </script>
+</body>
+
+</html>

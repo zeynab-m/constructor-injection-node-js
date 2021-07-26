@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head', {TITLE:`add new point` }) %>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+    <link href="/public/plugins/ssi-uploader/dist/ssi-uploader/styles/ssi-uploader.min.css" rel="stylesheet">
+    <link href="/public/plugins/slideShow/slider.css" rel="stylesheet">
+
+</head>
+
+<body class="layout layout-header-fixed">
+    <div class="layout-header">
+        <%- include('../partials/navbar', {TITLE:`add new zone`}) %>
+    </div>
+    <div class="layout-main">
+        <%- include('../partials/sidebar') %>
+        <div class="layout-content">
+            <div class="layout-content-body">
+                <div class="form-group col-md-6">
+                    <div class="card-body">
+                        <form id="myForm" method="POST" action="/backOffice/v1/point/create" >
+                            <input type="hidden" id='location' name="location">
+                            <input type="hidden" id="id" name="id" value=null>
+                            <div class="row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label"> name </label>
+                                    <input class="form-control"  id="name" name="name" type="text"
+                                        required>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label"> about </label>
+                                    <textarea class="form-control" required name="about" id="about" rows="10"></textarea>
+
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label"> address </label>
+                                    <input class="form-control" id="address" name="address" type="text">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label"> phone </label>
+                                    <input class="form-control" id="phone" name="phone" type="text">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label"> website </label>
+                                    <input class="form-control"  id="website" name="website" type="text">
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="control-label"> visitedAt </label>
+                                    <input class="form-control" id="visitedAt" name="visitedAt" type="date" required>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="" class="control-label"> add an image </label>
+
+                                            <input type="file" multiple id="ssi-upload"/>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="col-md-12">
+                            <input type="submit" form="myForm" class="btn btn-primary" value="submit">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div id="map" style="height: 80vh;"></div>
+                </div>
+
+                </div>
+
+        </div>
+        <%- include('../partials/footer') %>
+    </div>
+
+    <%- include('../partials/scripts') %>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin="">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Turf.js/4.7.3/turf.min.js"></script>
+    <script src="/public/plugins/ssi-uploader/dist/ssi-uploader/js/ssi-uploader.min.js"></script>
+    <script src="/public/js/pin.osm.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            $('#map').on('click', '.popup .cycle a', function() {
+                var $slideshow = $('.slideshow'),
+                    $newSlide;
+
+                if ($(this).hasClass('prev')) {
+                    $newSlide = $slideshow.find('.active').prev();
+                    if ($newSlide.index() < 0) {
+                        $newSlide = $('.image').last();
+                    }
+                } else {
+                    $newSlide = $slideshow.find('.active').next();
+                    if ($newSlide.index() < 0) {
+                        $newSlide = $('.image').first();
+                    }
+                }
+
+                $slideshow.find('.active').removeClass('active').hide();
+                $newSlide.addClass('active').show();
+                return false;
+            })
+
+            $('#ssi-upload').ssi_uploader({
+                inForm:true
+
+            });
+            let points = <%-JSON.stringify(points)%> || [];
+            var pin = new Pin().initiateMap({elementId: 'map'}).initiateDrawManager().addMarkers(points)
+            console.log({pin})
+            $('#myForm').validate({
+                    errorPlacement: function(error, element) {
+                        if(element.parent('.input-group').length) {
+                            error.insertAfter(element.parent());
+                        } else {
+                            error.insertAfter(element);
+                        }
+                    },
+                    highlight: function(element) {
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    unhighlight: function(element) {
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    },
+
+                    submitHandler: function(form,event) {
+                        event.preventDefault()
+
+                        var drawnItems = pin.getDrawnItemsGeoJson();
+                        if (!drawnItems.marker) {
+                            alert('please specify the location');
+                            return
+                        }
+
+                        let serializedForm=$('#myForm').serializeArray()
+                        var formData = new FormData();
+
+                        var filesLength=document.getElementById('ssi-upload').files.length;
+                        for(var i=0;i<filesLength;i++){
+                            formData.append("file[]", document.getElementById('ssi-upload').files[i]);
+                        }
+                        serializedForm.forEach(val=>formData.append(val.name, val.value))
+                        formData.set('visitedAt',new Date(form.visitedAt.value).toISOString())
+                        formData.set('location',JSON.stringify(drawnItems.marker.coordinates))
+
+
+
+                        $.ajax({
+                            url: form.action,
+                            type: form.method,
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            dataType: "json",
+                            success: function(response) {
+                                document.getElementById("myForm").reset();
+                                response.data.invalidInput.length?alert(`error in uploading ${response.data.invalidInput}`):''
+                                pin.addMarkers(response.data.point)
+
+                                console.log({response})
+                            },
+                            error:function (err){
+                                console.log('here')
+
+                            }
+                        });
+                    }
+                });
+
+
+
+        })
+    </script>
+</body>
+
+</html>

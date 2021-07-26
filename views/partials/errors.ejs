@@ -1,0 +1,8 @@
+<% var errors = flash('errors') %>
+<% if (errors.length) { %>
+    <div class="alert alert-danger text-center">
+        <% errors.forEach(error => { %>
+            <p> <%= error %> </p>
+        <% }) %>
+    </div>
+<% } %>

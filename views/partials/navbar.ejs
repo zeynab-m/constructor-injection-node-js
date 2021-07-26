@@ -1,0 +1,91 @@
+<div class="navbar navbar-default">
+    <div class="navbar-header">
+        <a class="navbar-brand navbar-brand-center" href="index-2.html">
+            <strong style="color: white;">Our Adventures</strong>
+        </a>
+        <button class="navbar-toggler visible-xs-block collapsed" type="button" data-toggle="collapse"
+            data-target="#sidenav">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="bars">
+                <span class="bar-line bar-line-1 out"></span>
+                <span class="bar-line bar-line-2 out"></span>
+                <span class="bar-line bar-line-3 out"></span>
+            </span>
+            <span class="bars bars-x">
+                <span class="bar-line bar-line-4"></span>
+                <span class="bar-line bar-line-5"></span>
+            </span>
+        </button>
+        <button class="navbar-toggler visible-xs-block collapsed" type="button" data-toggle="collapse"
+            data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="arrow-up"></span>
+            <span class="ellipsis ellipsis-vertical">
+                <img class="ellipsis-object" width="32" height="32" src="/public/img/0180441436.jpg" alt="Teddy Wilson">
+            </span>
+        </button>
+    </div>
+    <div class="navbar-toggleable">
+        <nav id="navbar" class="navbar-collapse collapse">
+            <button class="sidenav-toggler hidden-xs" title="Collapse sidenav ( [ )" aria-expanded="true" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="bars">
+                    <span class="bar-line bar-line-1 out"></span>
+                    <span class="bar-line bar-line-2 out"></span>
+                    <span class="bar-line bar-line-3 out"></span>
+                    <span class="bar-line bar-line-4 in"></span>
+                    <span class="bar-line bar-line-5 in"></span>
+                    <span class="bar-line bar-line-6 in"></span>
+                </span>
+            </button>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="visible-xs-block">
+                    <h4 class="navbar-text text-center">Hi</h4>
+                </li>
+
+<!--                <li class="dropdown">-->
+<!--                    <a class="dropdown-toggle" title="soltan" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                      <span class="icon-with-child hidden-xs">-->
+<!--                        <span class="<%= `flag-icon flag-icon-en`%>"></span>-->
+<!--                      </span>-->
+<!--                      <span class="visible-xs-block">-->
+<!--                        <span class="<%= `flag-icon flag-icon-en`%>"></span>-->
+<!--                        <span> سلطان </span>-->
+<!--                      </span>-->
+<!--                    </a>-->
+
+<!--                  </li>-->
+
+                <li class="dropdown hidden-xs">
+                    <button class="navbar-account-btn" data-toggle="dropdown" aria-haspopup="true">
+                        <img class="circle" width="36" height="36" src="/public/img/0180441436.jpg">
+                        <span><%= user.firstName %> </span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-left">
+                        <li class="navbar-upgrade-version">Version: 1.0.0</li>
+                        <li class="divider"></li>
+                        <li><a href="/backOffice/v1/user/logout">signOut </a></li>
+                    </ul>
+                </li>
+                <li class="visible-xs-block">
+                    <a href="/backOffice/v1/user/logout">
+                        <span class="icon icon-power-off icon-lg icon-fw"></span>
+                         signOut
+                    </a>
+                </li>
+
+            </ul>
+            <div class="title-bar">
+                <h1 class="title-bar-title">
+                    <span class="d-ib">Our Adventures</span>
+                </h1>
+                <p class="title-bar-description">
+                    <small>
+
+                    </small>
+                </p>
+            </div>
+        </nav>
+    </div>
+</div>

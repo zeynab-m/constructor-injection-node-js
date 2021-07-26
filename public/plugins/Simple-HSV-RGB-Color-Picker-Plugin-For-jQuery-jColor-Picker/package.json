@@ -1,0 +1,10 @@
+{
+  "name": "jColorPicker",
+  "version": "0.0.1",
+  "scripts": {
+	"js": "uglifyjs src/js/* -c --comments --screw-ie8 --mangle --lint -o dist/jcolor-picker.min.js",
+	"lint": "jshint src/js",
+    "cssprefix": "postcss src/css/jcolor-picker.css --use autoprefixer --no-map -d src/css/",
+	"css": "uglifycss src/css/jcolor-picker.css > dist/jcolor-picker.min.css"
+  }
+}

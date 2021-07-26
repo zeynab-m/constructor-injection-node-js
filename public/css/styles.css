@@ -1,0 +1,105 @@
+[class*="flag-icon-en"] {
+    background-image: url(../img/flags/4x3/us.svg)
+}
+
+[class*="flag-icon-fa"] {
+    background-image: url(../img/flags/4x3/ir.svg)
+}
+
+.input-group-addon.primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(50, 118, 177);
+    border-color: rgb(40, 94, 142);
+}
+.input-group-addon.success {
+    color: rgb(255, 255, 255);
+    background-color: rgb(92, 184, 92);
+    border-color: rgb(76, 174, 76);
+}
+.input-group-addon.info {
+    color: rgb(255, 255, 255);
+    background-color: rgb(57, 179, 215);
+    border-color: rgb(38, 154, 188);
+}
+.input-group-addon.warning {
+    color: rgb(255, 255, 255);
+    background-color: rgb(240, 173, 78);
+    border-color: rgb(238, 162, 54);
+}
+.input-group-addon.danger {
+    color: rgb(255, 255, 255);
+    background-color: rgb(217, 83, 79);
+    border-color: rgb(212, 63, 58);
+}
+
+.zero-radius {
+    border-radius: 0px !important;
+}
+
+.zero-padding {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+}
+
+.zero-margin {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    margin-right: 0px !important;
+    margin-left: 0px !important;
+}
+
+.p-r-5 {
+    padding-right: 5px !important;
+}
+.p-l-5 {
+    padding-left: 5px !important;
+}
+
+.p-x-5 {
+    padding-right: 5px !important;
+    padding-left: 5px !important;
+}
+
+.p-y-5 {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+.dropdown-i {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dropdown-plus-icon {
+    padding: 5px;
+}
+
+.image-wrapper {
+    border: 1px solid #e7e7ec;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.block {
+    display: block;
+}
+
+.m-r-5 {
+    margin-right: 5px !important;
+}
+.m-l-5 {
+    margin-left: 5px !important;
+}
+
+.m-x-5 {
+    margin-right: 5px !important;
+    margin-left: 5px !important;
+}
+
+.m-y-5 {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
