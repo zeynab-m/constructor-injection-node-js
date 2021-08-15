@@ -35,7 +35,7 @@
                                                     <td><%= zone.name %> </td>
                                                     <td><%= zone.isActive ? 'active' : 'deactivate' %> </td>
                                                     <td>
-                                                        <a href= <%= `/backOffice/v1/zone/delete/${zone._id}` %> >
+                                                        <a href= <%= `/backOffice/v1/zone/delete/${zone.id}` %> >
                                                             <span class="icon icon-remove"></span>
                                                         </a>
                                                     </td>
@@ -58,7 +58,7 @@
     <script>
 
         $("#zones-table").dataTable({
-            columnDefs: [{}, { width: '5%', targets: 3,  orderable: false }],
+            columnDefs: [{}, { width: '5%', targets: 2,  orderable: false }],
         });
     </script>
 </body>

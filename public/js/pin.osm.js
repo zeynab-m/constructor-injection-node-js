@@ -82,7 +82,7 @@ class Pin{
 
     };
    addMarkers (points) {
-        console.log({points})
+
        let geoJson={
            "type": "FeatureCollection",
            features:[]
@@ -109,7 +109,6 @@ class Pin{
 
        L.geoJson(geoJson, {
            style: function (feature) {
-               console.log({feature})
                return {color: feature.properties.color};
            },
            onEachFeature: this.onEachFeature,

@@ -54,6 +54,7 @@
     "jspdf": "^1.5.3",
     "jwt-simple": "^0.5.1",
     "knex": "^0.95.9",
+    "knex-postgis": "^0.14.1",
     "mime": "^2.4.4",
     "moment-jalaali": "^0.7.0",
     "mongodb": "^3.3.4",
