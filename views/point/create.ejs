@@ -118,6 +118,7 @@
 
             });
             let points = <%-JSON.stringify(points)%> || [];
+            console.log({points})
             var pin = new Pin().initiateMap({elementId: 'map'}).initiateDrawManager().addMarkers(points)
 
             $('#myForm').validate({
@@ -165,6 +166,7 @@
                             contentType: false,
                             dataType: "json",
                             success: function(response) {
+                                console.log({response})
 
                                 document.getElementById("myForm").reset();
                                 pin.addMarkers(response.data.point)

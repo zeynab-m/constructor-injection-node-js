@@ -94,7 +94,7 @@ Areas.prototype.getDrawnItemsGeoJson = function() {
 };
 
 Areas.prototype.drawAreas = function(options = {}) {
-    
+
     for (var i = 0; i < this.areas.length; i++ ) {
         var coordinates = this.areas[i].location.coordinates.map(function(coords){
             return {lat: coords[1], lng: coords[0]}
@@ -112,7 +112,6 @@ Areas.prototype.drawAreas = function(options = {}) {
         area.id = this.areas[i].id;
         area.name = this.areas[i].name;
         area.isActive = this.areas[i].isActive;
-        console.log({area})
         this.drawnAreas.addLayer(area);
 
     }
@@ -150,7 +149,6 @@ Areas.prototype.checkIntersections = function() {
 // --------------- event handlers ---------------
 Areas.prototype.onDrawCreated = function(event) {
 
-    console.log("onDrawCreated", event);
 
     var layers = this.drawnItems.getLayers();
     var markerCount = layers.filter(l => l instanceof L.Marker).length;
@@ -176,14 +174,14 @@ Areas.prototype.onDrawCreated = function(event) {
 };
 
 Areas.prototype.onDrawEdited = function(event) {
-    console.log("onDrawEdited", event);
+
     var polygonCount = this.drawnItems.getLayers().filter(l => l instanceof L.Polygon).length;
     if (polygonCount) this.checkIntersections();
     
 };
 
 Areas.prototype.onDrawDeleted = function(event) {
-    console.log("onDrawDeleted", event)
+
     if (this.drawnItems.getLayers().length < 2 && this.drawControlMode == 'full'){
         this.drawControlFull.addTo(this.map);
         this.drawControlEditOnly.remove(this.map);                    

@@ -10,7 +10,7 @@ class DataTableHelper {
 
 
     static renderProjectsAction (data, type, row, meta) {
-        console.log({data})
+
         return `<div>
                     <a class="btn btn-sm btn-primary" title="ویرایش اطلاعات" href="/backOffice/project/edit/index/${data}"><i class="icon icon-edit"></i></a>
                 </div>`
@@ -68,7 +68,6 @@ class DataTableHelper {
 
 
     static createDataTable(element, ajaxUrl, columns, queries={}, order=[]) {
-        console.log({element, ajaxUrl, columns, queries, order})
 
         var query = {};
 

@@ -72,6 +72,7 @@
         $(function(){
             
             var zones =<%- JSON.stringify(zones) %>;
+            console.log({zones})
             var zone = new Areas({
                 areas: zones,
                 areaType: 'zone'

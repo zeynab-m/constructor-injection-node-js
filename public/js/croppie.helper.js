@@ -24,7 +24,6 @@ CroppieHelper.prototype.loadImage = function(imageUrl) {
 CroppieHelper.prototype.bind = function() {
     var $image = $(this.canvas_id);
     var url_input_id = this.url_input_id;
-    console.log({$image,url_input_id})
 
     $(this.file_input_id).change(function(event){
 
@@ -69,7 +68,6 @@ CroppieHelper.prototype.bind = function() {
                         },
                         url: image.src,
                     })
-                    console.log({$image})
 
                 };
             }
